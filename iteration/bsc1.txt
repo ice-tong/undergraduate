@@ -1,0 +1,37 @@
+# Setup
+c-->from imp import reload
+c-->import influence
+c-->reload(influence)
+# Test read_graph
+c-->g1 = influence.read_graph(open('graph1.txt'))
+==-->g1-->{'a': {'b', 'c'}, 'b': {'a', 'c'}, 'c': {'g', 'a', 'b', 'd'}, 'd': {'e', 'c', 'f'}, 'e': {'d'}, 'f': {'d'}, 'g': {'h', 'c', 'j'}, 'h': {'g'}, 'j': {'g', 'i'}, 'i': {'j'}, 'k': set()}
+c-->g2 = influence.read_graph(open('graph2.txt'))
+==-->g2-->{'bob': {'alice', 'carol'}, 'alice': {'ted', 'bob'}, 'carol': {'ted', 'bob'}, 'ted': {'alice', 'carol'}}
+c-->g3 = influence.read_graph(open('graph3.txt'))
+==-->g3-->{'a': {'e', 'b', 'c', 'd'}, 'b': {'a', 'e'}, 'c': {'g', 'a', 'e', 'f'}, 'd': {'a', 'f'}, 'e': {'a', 'b', 'c'}, 'f': {'c', 'd'}, 'g': {'c'}}
+# Test graph_as_str
+c-->g1 = {'a': {'b', 'c'}, 'b': {'a', 'c'}, 'c': {'g', 'a', 'b', 'd'}, 'd': {'e', 'c', 'f'}, 'e': {'d'}, 'f': {'d'}, 'g': {'h', 'c', 'j'}, 'h': {'g'}, 'j': {'g', 'i'}, 'i': {'j'}, 'k': set()}
+e-->repr(influence.graph_as_str(g1))-->"  a -> ['b', 'c']\n  b -> ['a', 'c']\n  c -> ['a', 'b', 'd', 'g']\n  d -> ['c', 'e', 'f']\n  e -> ['d']\n  f -> ['d']\n  g -> ['c', 'h', 'j']\n  h -> ['g']\n  i -> ['j']\n  j -> ['g', 'i']\n  k -> []\n"
+c-->g2 = {'bob': {'alice', 'carol'}, 'alice': {'ted', 'bob'}, 'carol': {'ted', 'bob'}, 'ted': {'alice', 'carol'}}
+e-->repr(influence.graph_as_str(g2))-->"  alice -> ['bob', 'ted']\n  bob -> ['alice', 'carol']\n  carol -> ['bob', 'ted']\n  ted -> ['alice', 'carol']\n"
+c-->g3 = {'a': {'e', 'b', 'c', 'd'}, 'b': {'a', 'e'}, 'c': {'g', 'a', 'e', 'f'}, 'd': {'a', 'f'}, 'e': {'a', 'b', 'c'}, 'f': {'c', 'd'}, 'g': {'c'}}
+e-->repr(influence.graph_as_str(g3))-->"  a -> ['b', 'c', 'd', 'e']\n  b -> ['a', 'e']\n  c -> ['a', 'e', 'f', 'g']\n  d -> ['a', 'f']\n  e -> ['a', 'b', 'c']\n  f -> ['c', 'd']\n  g -> ['c']\n"
+# Test find_influencers
+c-->g1 = {'a': {'b', 'c'}, 'b': {'a', 'c'}, 'c': {'g', 'a', 'b', 'd'}, 'd': {'e', 'c', 'f'}, 'e': {'d'}, 'f': {'d'}, 'g': {'h', 'c', 'j'}, 'h': {'g'}, 'j': {'g', 'i'}, 'i': {'j'}, 'k': set()}
+==-->influence.find_influencers(g1)-->{'k', 'g', 'd'}
+c-->g2 = {'bob': {'alice', 'carol'}, 'alice': {'ted', 'bob'}, 'carol': {'ted', 'bob'}, 'ted': {'alice', 'carol'}}
+==-->influence.find_influencers(g2)-->{'ted'}
+c-->g3 = {'a': {'e', 'b', 'c', 'd'}, 'b': {'a', 'e'}, 'c': {'g', 'a', 'e', 'f'}, 'd': {'a', 'f'}, 'e': {'a', 'b', 'c'}, 'f': {'c', 'd'}, 'g': {'c'}}
+==-->influence.find_influencers(g3)-->{'c'}
+# Test all_influenced
+c-->g1 = {'a': {'b', 'c'}, 'b': {'a', 'c'}, 'c': {'g', 'a', 'b', 'd'}, 'd': {'e', 'c', 'f'}, 'e': {'d'}, 'f': {'d'}, 'g': {'h', 'c', 'j'}, 'h': {'g'}, 'j': {'g', 'i'}, 'i': {'j'}, 'k': set()}
+==-->influence.all_influenced(g1,{'a','d'})-->{'b', 'f', 'c', 'e', 'a', 'd'}
+==-->influence.all_influenced(g1,{'d','f','k'})-->{'k', 'e', 'f', 'd'}
+==-->influence.all_influenced(g1,{'g','e'})-->{'h', 'i', 'j', 'g', 'e'}
+==-->influence.all_influenced(g1,{'c'})-->{'a', 'b', 'c'}
+==-->influence.all_influenced(g1,{'g'})-->{'h', 'g', 'i', 'j'}
+==-->influence.all_influenced(g1,{'k'})-->{'k'}
+==-->influence.all_influenced(g1,{'d','g','k'})-->{'h', 'b', 'i', 'j', 'k', 'f', 'c', 'g', 'e', 'a', 'd'}
+c-->g3 = {'a': {'e', 'b', 'c', 'd'}, 'b': {'a', 'e'}, 'c': {'g', 'a', 'e', 'f'}, 'd': {'a', 'f'}, 'e': {'a', 'b', 'c'}, 'f': {'c', 'd'}, 'g': {'c'}}
+==-->influence.all_influenced(g3,{'a'})-->{'b', 'f', 'c', 'g', 'e', 'a', 'd'}
+==-->influence.all_influenced(g3,{'c'})-->{'b', 'f', 'c', 'g', 'e', 'a', 'd'}
