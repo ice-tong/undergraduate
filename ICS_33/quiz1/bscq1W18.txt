@@ -1,0 +1,47 @@
+# Setup
+c-->from importlib import reload
+c-->import q1solution
+c-->reload(q1solution)
+c-->from q1solution import solve_root, enrollments, hardness, honors, honors2, grade_view
+c-->from goody import irange
+c-->import math
+c-->from math import isclose
+
+# Test solver_root
+c-->rooter = solve_root(lambda x : 3*x**4 + 3*x**3 - 1, .00001)
+e-->isclose(rooter(0,1),0.593,abs_tol=.001)-->True
+e-->isclose(rooter(-1,-2),-1.195,abs_tol=.001)-->True
+c-->rooter = solve_root(lambda x : 23*math.sqrt(x) - (10*math.log2(x)**2+1000), .1)
+e-->isclose(rooter(10000,20000),16630,abs_tol=1)-->True
+
+# Test enrollments
+c-->db1 = {'ICS-31': {('Bob', 'A'), ('David', 'C'), ('Carol', 'B')}, 'Math-3A': {('Bob', 'B'), ('Alice', 'A')}}
+==-->enrollments(db1)-->[('ICS-31', 3), ('Math-3A', 2)]
+c-->db2 = {'ICS-31':  {('Carol', 'B+'), ('Debbie','B-')}, 'ICS-32':  {('Alan', 'B')}, 'ICS-33':  {('Fran', 'A+'),('Herb','C'),('Erin','B')}, 'Math-3A': {('Bob', 'B+'), ('Alan', 'A')}, 'Math-3B': {('Bob', 'C'), ('Alan', 'B+')}}
+==-->enrollments(db2)-->[('ICS-33', 3), ('ICS-31', 2), ('Math-3A', 2), ('Math-3B', 2), ('ICS-32', 1)]
+
+# Test hardness
+c-->db1 = {'ICS-31': {('Bob', 'A'), ('David', 'C'), ('Carol', 'B')}, 'Math-3A': {('Bob', 'B'), ('Alice', 'A')}}
+==-->hardness(db1)-->['ICS-31', 'Math-3A']
+c-->db2 = {'ICS-31':  {('Carol', 'B+'), ('Debbie','B-')}, 'ICS-32':  {('Alan', 'B')}, 'ICS-33':  {('Fran', 'A+'),('Herb','C'),('Erin','B')}, 'Math-3A': {('Bob', 'B+'), ('Alan', 'A')}, 'Math-3B': {('Bob', 'C'), ('Alan', 'B+')}}
+==-->hardness(db2)-->['Math-3B', 'ICS-33', 'ICS-31', 'ICS-32', 'Math-3A']
+
+# Test honors
+c-->db1 = {'ICS-31': {('Bob', 'A'), ('David', 'C'), ('Carol', 'B')}, 'Math-3A': {('Bob', 'B'), ('Alice', 'A')}}
+==-->honors(db1,2.7)-->{'ICS-31': ['Bob', 'Carol'], 'Math-3A': ['Alice', 'Bob']}
+c-->db2 = {'ICS-31':  {('Carol', 'B+'), ('Debbie','B-')}, 'ICS-32':  {('Alan', 'B')}, 'ICS-33':  {('Fran', 'A+'),('Herb','C'),('Erin','B')}, 'Math-3A': {('Bob', 'B+'), ('Alan', 'A')}, 'Math-3B': {('Bob', 'C'), ('Alan', 'B+')}}
+==-->honors(db2,3.3)-->{'ICS-31': ['Carol'], 'ICS-32': [], 'ICS-33': ['Fran'], 'Math-3A': ['Alan', 'Bob'], 'Math-3B': ['Alan']}
+
+# Test honors2
+c-->db1 = {'ICS-31': {('Bob', 'A'), ('David', 'C'), ('Carol', 'B')}, 'Math-3A': {('Bob', 'B'), ('Alice', 'A')}}
+==-->honors2(db1,2.7)-->{'ICS-31': ['Bob', 'Carol'], 'Math-3A': ['Alice', 'Bob']}
+c-->db2 = {'ICS-31':  {('Carol', 'B+'), ('Debbie','B-')}, 'ICS-32':  {('Alan', 'B')}, 'ICS-33':  {('Fran', 'A+'),('Herb','C'),('Erin','B')}, 'Math-3A': {('Bob', 'B+'), ('Alan', 'A')}, 'Math-3B': {('Bob', 'C'), ('Alan', 'B+')}}
+==-->honors2(db2,2.7)-->{'ICS-31': ['Carol', 'Debbie'], 'ICS-32': ['Alan'], 'ICS-33': ['Fran', 'Erin'], 'Math-3A': ['Alan', 'Bob'], 'Math-3B': ['Alan']}
+c-->db3 = {'ICS-31':  {('Carol', 'B+'), ('Alan', 'B')}}
+==-->honors2(db3,3.0)-->{'ICS-31': ['Carol', 'Alan']}
+
+# Test grade_view
+c-->db1 = {'ICS-31': {('Bob', 'A'), ('David', 'C'), ('Carol', 'B')}, 'Math-3A': {('Bob', 'B'), ('Alice', 'A')}}
+==-->grade_view(db1)-->{'C': {'ICS-31': {'David'}}, 'A': {'ICS-31': {'Bob'}, 'Math-3A': {'Alice'}}, 'B': {'ICS-31': {'Carol'}, 'Math-3A': {'Bob'}}}
+c-->db2 = {'ICS-31':  {('Carol', 'B+'), ('Debbie','B-')}, 'ICS-32':  {('Alan', 'B')}, 'ICS-33':  {('Fran', 'A+'),('Herb','C'),('Erin','B')}, 'Math-3A': {('Bob', 'B+'), ('Alan', 'A')}, 'Math-3B': {('Bob', 'C'), ('Alan', 'B+')}}
+==-->grade_view(db2)-->{'B': {'ICS-31': {'Carol', 'Debbie'}, 'ICS-32': {'Alan'}, 'ICS-33': {'Erin'}, 'Math-3A': {'Bob'}, 'Math-3B': {'Alan'}}, 'C': {'ICS-33': {'Herb'}, 'Math-3B': {'Bob'}}, 'A': {'ICS-33': {'Fran'}, 'Math-3A': {'Alan'}}}

@@ -1,0 +1,112 @@
+# Setup
+c-->from importlib import reload
+c-->import q2solution
+c-->reload(q2solution)
+c-->from q2solution import expand_re, multiline_search
+c-->import re
+
+# Read/Test Regular Expression Patterns (read from repattern files)
+c-->p1a = open('repattern1a.txt').readline().rstrip()
+c-->print('   ...Testing the pattern p1a: ',p1a)
+
+# The following text should match the pattern
+!=-->re.match(p1a,'# Submitter: antp(Anteater, Peter)')-->None
+!=-->re.match(p1a,'# Submitter: a(B, C)')-->None
+!=-->re.match(p1a,'# Submitter: antp2(Anteater, Peter)')-->None
+
+# The following text should NOT match the pattern
+==-->re.match(p1a,'# Submitter:')-->None
+==-->re.match(p1a,'Submitter: antp(Anteater, Peter)')-->None
+==-->re.match(p1a,'#Submitter: antp(Anteater, Peter)')-->None
+==-->re.match(p1a,'# submitter: antp(Anteater, Peter)')-->None
+==-->re.match(p1a,'# Submit: antp(Anteater, Peter)')-->None
+==-->re.match(p1a,'# Submitter antp(Anteater, Peter)')-->None
+==-->re.match(p1a,'# Submitter:antp(Anteater, Peter)')-->None
+==-->re.match(p1a,'# Submitter: Ant(Anteater, Peter)')-->None
+==-->re.match(p1a,'# Submitter: aNt(Anteater, Peter)')-->None
+==-->re.match(p1a,'# Submitter: 2(Anteater, Peter)')-->None
+==-->re.match(p1a,'# Submitter: 2antp(Anteater, Peter)')-->None
+==-->re.match(p1a,'# Submitter: antp(Anteater, Peter')-->None
+==-->re.match(p1a,'# Submitter: antp(Anteater,Peter)')-->None
+==-->re.match(p1a,'# Submitter: antp(AntEater, Peter)')-->None
+==-->re.match(p1a,'# Submitter: antp(Anteater2, Peter)')-->None
+==-->re.match(p1a,'# Submitter: antp(Anteater, Peter2)')-->None
+
+
+# Read/Test Regular Expression Patterns (read from repattern files)
+c-->p1b = open('repattern1b.txt').readline().rstrip()
+c-->print('   ...Testing the pattern p1b: ',p1b)
+
+# The following text should match the pattern
+!=-->re.match(p1b,'J')-->None
+!=-->re.match(p1b,'J.')-->None
+!=-->re.match(p1b,'J. J J.')-->None
+!=-->re.match(p1b,'Jj')-->None
+!=-->re.match(p1b,'Mary Bob')-->None
+!=-->re.match(p1b,'M-bob')-->None
+!=-->re.match(p1b,'Marybob')-->None
+!=-->re.match(p1b,'Mary Bob Joe')-->None
+!=-->re.match(p1b,'Mary-joe-bob')-->None
+!=-->re.match(p1b,'Joey-joe Bobby-bob Bobby Bob')-->None
+
+# The following text should NOT match the pattern
+==-->re.match(p1b,'j')-->None
+==-->re.match(p1b,'j.')-->None
+==-->re.match(p1b,'J.J.J.')-->None
+==-->re.match(p1b,'J2')-->None
+==-->re.match(p1b,'Mary bob')-->None
+==-->re.match(p1b,'Mary  Bob')-->None
+==-->re.match(p1b,'Mary-Bob')-->None
+==-->re.match(p1b,'Mary-')-->None
+==-->re.match(p1b,'Mary--')-->None
+==-->re.match(p1b,'Mary--bob')-->None
+==-->re.match(p1b,'M.-bob')-->None
+
+# Read/Test Regular Expression Patterns (read from repattern files)
+c-->p1c = open('repattern1c.txt').readline().rstrip()
+c-->print('   ...Testing the pattern p1c: ',p1c)
+
+# The following text should match the pattern
+!=-->re.match(p1c,'#Submitter:antp(Anteater,Peter)')-->None
+!=-->re.match(p1c,'# Submitter: a(B, C)')-->None
+!=-->re.match(p1c,'# Submitter: antp2(Anteater, Peter)')-->None
+!=-->re.match(p1c,'#Submitter:antp(Anteater,Peter)')-->None
+!=-->re.match(p1c,'#    Submitter    :   antp(Anteater,    Peter)')-->None
+!=-->re.match(p1c,'#S:antp(Anteater,Peter)')-->None
+!=-->re.match(p1c,'#Shush:antp(Anteater,Peter)')-->None
+!=-->re.match(p1c,'# Submitter: mb2(Marybob, Mary Bob)')-->None
+
+# The following text should NOT match the pattern
+==-->re.match(p1c,'#Submitter antp(Anteater,Peter)')-->None
+==-->re.match(p1c,'#Submitterantp(Anteater,Peter)')-->None
+==-->re.match(p1c,'#Submitter:2antp(Anteater,Peter)')-->None
+==-->re.match(p1c,'#Submitter:2antp (Anteater,Peter)')-->None
+
+# Read/Test Regular Expression Patterns (read from repattern files)
+c-->p1d = open('repattern1d.txt').readline().rstrip()
+c-->print('   ...Testing the pattern p1d: ',p1d)
+
+# The following text should match the pattern, and provide the shown groups
+==-->re.match(p1d,'# Submitter: antp(Anteater, Peter)').groups()-->('antp', 'Anteater', 'Peter')
+==-->re.match(p1d,'# Submitter: antp(Anteater, Peter)').groupdict()-->{'id': 'antp', 'last': 'Anteater', 'first': 'Peter'}
+==-->re.match(p1d,'# Submitter: a(B, C)').groups()-->('a', 'B', 'C')
+==-->re.match(p1d,'# Submitter: a(B, C)').groupdict()-->{'id': 'a', 'last': 'B', 'first': 'C'}
+==-->re.match(p1d,'# Submitter: antp2(Anteater, Peter)').groups()-->('antp2', 'Anteater', 'Peter')
+==-->re.match(p1d,'# Submitter: antp2(Anteater, Peter)').groupdict()-->{'id': 'antp2', 'last': 'Anteater', 'first': 'Peter'}
+==-->re.match(p1d,'# Submitter: pattis(Pattis, R)').groups()-->('pattis', 'Pattis', 'R')
+==-->re.match(p1d,'# Submitter: pattis(Pattis, R)').groupdict()-->{'id': 'pattis', 'last': 'Pattis', 'first': 'R'}
+
+# Testing expand_re
+c-->pd = dict(dig=r'\x', integer=r'[=-]?#dig##dig#*')
+c-->expand_re(pd)
+==-->dict(pd.items())-->{'dig': '\\x', 'integer': '[=-]?(?:\\x)(?:\\x)*'}
+c-->pd = dict(int=r'[+-]?\x+', integer_range =r'#int#(..#int#)?', integer_list  =r'#integer_range#(?,#integer_range#)*', integer_set =r'{#integer_list#?}')
+c-->expand_re(pd)
+==-->dict(pd.items())-->{'int': '[+-]?\\x+', 'integer_range': '(?:[+-]?\\x+)(..(?:[+-]?\\x+))?', 'integer_list': '(?:(?:[+-]?\\x+)(..(?:[+-]?\\x+))?)(?,(?:(?:[+-]?\\x+)(..(?:[+-]?\\x+))?))*', 'integer_set': '{(?:(?:(?:[+-]?\\x+)(..(?:[+-]?\\x+))?)(?,(?:(?:[+-]?\\x+)(..(?:[+-]?\\x+))?))*)?}'}
+c-->pd = pd = dict(alpha='xorrect',b='#alpha#',c='#b#',d='#c#',e='#d#',f='#e#',g='#f#')
+c-->expand_re(pd)
+==-->dict(pd.items())-->{'alpha': 'xorrect', 'b': '(?:xorrect)', 'c': '(?:(?:xorrect))', 'd': '(?:(?:(?:xorrect)))', 'e': '(?:(?:(?:(?:xorrect))))', 'f': '(?:(?:(?:(?:(?:xorrect)))))', 'g': '(?:(?:(?:(?:(?:(?:xorrect))))))'}
+
+# Testing multi_search
+==-->multiline_search(open('pats1.txt'),open('texts1.txt'))-->[(1, [1]), (3, [2]), (4, [5]), (5, [1, 4]), (6, [3]), (7, [5])]
+==-->multiline_search(open('pats2.txt'),open('texts2.txt'))-->[(1, [1]), (5, [4]), (6, [4]), (12, [3]), (17, [2]), (22, [5])]

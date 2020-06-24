@@ -1,0 +1,1 @@
+^# Submitter: (?P<id>[a-z][a-z0-9]*)\((?P<last>[A-Z][a-z]*), (?P<first>[A-Z][a-z]*)\)$

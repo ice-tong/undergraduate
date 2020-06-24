@@ -1,0 +1,79 @@
+# Setup
+c-->from importlib import reload
+c-->import q5solution
+c-->reload(q5solution)
+c-->import predicate,random
+c-->from functools import reduce
+c-->from q5solution import compare, get_assoc, del_assoc, set_assoc, immutify
+
+# Test compare
+e-->compare('','')-->=
+e-->compare('','abc')--><
+e-->compare('abc','')-->>
+e-->compare('abc','abc')-->=
+e-->compare('bc','abc')-->>
+e-->compare('abc','bc')--><
+e-->compare('aaaxc','aaabd')-->>
+e-->compare('aaabd','aaaxc')--><
+
+# Test get_assoc
+c-->assoc = ( ('a',1), ('c',3), ('d',4), ('b',2) )
+e-->get_assoc(assoc, 'a')-->1
+e-->get_assoc(assoc, 'b')-->2
+e-->get_assoc(assoc, 'c')-->3
+e-->get_assoc(assoc, 'd')-->4
+^-->get_assoc(assoc, 'x')-->KeyError
+
+# Test del_assoc
+c-->assoc = ( ('a',1), ('c',3), ('d',4), ('b',2) )
+c-->ans = del_assoc(assoc,'b')
+e-->ans-->(('a', 1), ('c', 3), ('d', 4))
+c-->assoc = (('a', 1), ('c', 3), ('d', 4))
+^-->del_assoc(assoc,'x')-->KeyError
+c-->ans = del_assoc(assoc,'a')
+e-->ans-->(('c', 3), ('d', 4))
+c-->assoc = (('c', 3), ('d', 4))
+c-->ans = del_assoc(assoc,'c')
+e-->ans-->(('d', 4),)
+c-->assoc = (('d', 4),)
+c-->ans = del_assoc(assoc,'d')
+e-->ans-->()
+c-->assoc = ()
+^-->del_assoc(assoc,'x')-->KeyError
+
+# Test set_assoc
+c-->assoc = ()
+c-->ans = set_assoc(assoc,'b', 2)
+e-->ans-->(('b', 2),)
+c-->assoc = (('b', 2),)
+c-->ans = set_assoc(assoc,'a', 1)
+e-->ans-->(('b', 2), ('a', 1))
+c-->assoc = (('b', 2), ('a', 1))
+c-->ans = set_assoc(assoc,'c', 3)
+e-->ans-->(('b', 2), ('a', 1), ('c', 3))
+c-->assoc = (('b', 2), ('a', 1), ('c', 3))
+c-->ans = set_assoc(assoc,'d', 4)
+e-->ans-->(('b', 2), ('a', 1), ('c', 3), ('d', 4))
+c-->assoc = (('b', 2), ('a', 1), ('c', 3), ('d', 4))
+c-->ans = set_assoc(assoc,'b', 102)
+e-->ans-->(('b', 102), ('a', 1), ('c', 3), ('d', 4))
+c-->assoc = (('b', 102), ('a', 1), ('c', 3), ('d', 4))
+c-->ans = set_assoc(assoc,'c', 103)
+e-->ans-->(('b', 102), ('a', 1), ('c', 103), ('d', 4))
+c-->assoc = (('b', 102), ('a', 1), ('c', 103), ('d', 4))
+c-->ans = set_assoc(assoc,'d', 104)
+e-->ans-->(('b', 102), ('a', 1), ('c', 103), ('d', 104))
+
+
+# Test immutify
+e-->immutify(1)-->1
+e-->immutify('a')-->a
+e-->immutify( (1, 2, 3))-->(1, 2, 3)
+e-->immutify( frozenset([1, 2, 3]))-->frozenset({1, 2, 3})
+e-->immutify( [1, 2, 3, 4, 5, 6])-->(1, 2, 3, 4, 5, 6)
+e-->immutify( [1, 2, [3, [4], 5], 6])-->(1, 2, (3, (4,), 5), 6)
+e-->immutify( [1, 2, (3, [4], 5), 6])-->(1, 2, (3, (4,), 5), 6)
+e-->immutify( [{1,2}, {3,frozenset([4,5])}, {6,7}])-->(frozenset({1, 2}), frozenset({3, frozenset({4, 5})}), frozenset({6, 7}))
+e-->immutify( [{1,2}, {3,frozenset([4,5])}, [{5,6}]])-->(frozenset({1, 2}), frozenset({3, frozenset({4, 5})}), (frozenset({5, 6}),))
+e-->immutify( {'b' : [1,2], 'a' : {'ab': {1,2}, 'aa' : (1,2)}})-->(('a', (('aa', (1, 2)), ('ab', frozenset({1, 2})))), ('b', (1, 2)))
+

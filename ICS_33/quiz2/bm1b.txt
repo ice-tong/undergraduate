@@ -1,0 +1,22 @@
+J
+J.
+J. J J.
+Jj
+Mary Bob
+Mary-bob
+M-bob
+Mary Bob Joe
+Mary-joe-bob
+Joey-joe Bobby-bob Bobby Bob
+Above should match; below should not (and of course, not this line)
+j
+j.
+J.J.J.
+J2
+Mary bob
+Mary  Bob
+Mary-Bob
+Mary-
+Mary--
+Mary--bob
+M.-bob

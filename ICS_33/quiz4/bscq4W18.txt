@@ -1,0 +1,54 @@
+# Setup
+c-->from importlib import reload
+c-->import q4solution
+c-->reload(q4solution)
+c-->from goody import irange
+c-->from predicate import is_prime
+c-->from q4solution import hide, primes, running_count, stop_when, yield_and_skip, windows, alternate, myzip, Backwardable
+c-->from helpers import nth, Backwardable_test
+c-->from inspect import isgenerator
+
+
+# Test running_count
+e-->isgenerator(running_count('bananastand',lambda x : True))-->True
+e-->''.join([str(v) for v in running_count(hide('bananastand'),lambda x : x in 'aeiou')])-->01122333444
+e-->''.join([str(v) for v in running_count(primes(100),lambda x : x%10==3)])-->0111122233333445555566777
+e-->''.join([str(v) for v in running_count(primes(100),lambda x : x%10==7)])-->0001112222233344445555556
+e-->nth(running_count(primes(),lambda x : x%10 == 3),1000)-->253
+
+# Test stop_when
+e-->isgenerator(stop_when('abcdefghijk', lambda x : x >='d'))-->True
+e-->''.join([str(v) for v in stop_when(hide('abcdefghijk'), lambda x : x >='d')])-->abc
+e-->' '.join([str(v) for v in stop_when(primes(50), lambda x : x >=50 and x%10==1)])-->2 3 5 7 11 13 17 19 23 29 31 37 41 43 47
+e-->nth(stop_when(primes(),lambda x : x > 100000),100)-->541
+
+# Test yield_and_skip
+e-->isgenerator(yield_and_skip([1, 2, 1, 3, 'a', 'b', 2, 5, 'c', 1, 2, 3, 8, 'x', 'y', 'z', 2]))-->True
+==-->[v for v in yield_and_skip(hide([1, 2, 1, 3, 'a', 'b', 2, 5, 'c', 1, 2, 3, 8, 'x', 'y', 'z', 2]))]-->[1, 1, 'a', 'b', 2, 1, 3, 'z', 2]
+==-->[v for v in yield_and_skip(hide(['a', 'b', 1, 2, 3, 'c', 'd', 1, 2, 8, 'x', 'y', 'z', 2]))]-->['a', 'b', 1, 3, 2, 'y', 'z', 2]
+e-->nth(yield_and_skip(primes()),5)-->1811
+
+# Test windows
+e-->isgenerator(windows('abcdefghijk',4,2))-->True
+==-->[v for v in windows(hide('abcdefghijk'),4,2)]-->[['a', 'b', 'c', 'd'], ['c', 'd', 'e', 'f'], ['e', 'f', 'g', 'h'], ['g', 'h', 'i', 'j']]
+==-->[v for v in windows(hide('abcdefghijk'),4,3)]-->[['a', 'b', 'c', 'd'], ['d', 'e', 'f', 'g'], ['g', 'h', 'i', 'j']]
+==-->[v for v in windows(hide('abcdefghijk'),3,2)]-->[['a', 'b', 'c'], ['c', 'd', 'e'], ['e', 'f', 'g'], ['g', 'h', 'i'], ['i', 'j', 'k']]
+e-->nth(windows(primes(),10,5),20)-->[503, 509, 521, 523, 541, 547, 557, 563, 569, 571]
+
+# Test alternate
+e-->isgenerator(alternate('abcde','fg','hijk'))-->True
+e-->''.join([str(v) for v in alternate('abcde','fg','hijk')])-->afhbgic
+e-->''.join([str(v) for v in alternate(hide('abcde'),hide('fg'),hide('hijk'))])-->afhbgic
+e-->''.join([str(v) for v in alternate(hide('fg'),hide('hijk'),hide('abcde'))])-->fhagib
+e-->''.join([str(v) for v in alternate(primes(20), hide('fghi'),hide('jk'))])-->2fj3gk5h
+e-->nth(alternate(primes(),primes()),50)-->97
+
+# Test myzip
+e-->isgenerator(myzip('abcde', 'fg','hijk'))-->True
+==-->[v for v in myzip(hide('abcde'), hide('fg'),hide('hijk'))]-->[('a', 'f', 'h'), ('b', 'g', 'i'), ('c', None, 'j'), ('d', None, 'k'), ('e', None, None)]
+==-->[v for v in myzip(primes(20), hide('fghi'),hide('jk'))]-->[(2, 'f', 'j'), (3, 'g', 'k'), (5, 'h', None), (7, 'i', None), (11, None, None), (13, None, None), (17, None, None), (19, None, None)]
+e-->nth(myzip(primes(),primes()),50)-->(229, 229)
+
+# Test Backwardable
+e-->Backwardable_test(iter(Backwardable('abcde')),'nnnpppnnnnnnppnnn')-->abcba^bcde^^dcde^
+e-->Backwardable_test(iter(Backwardable(primes())),'nnnpppnnnnnnnnppnppnnn')-->23532^35711131719231917191713171923

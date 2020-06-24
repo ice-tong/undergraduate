@@ -1,0 +1,30 @@
+import prompt
+from  stopwatch import Stopwatch
+
+
+original_number = prompt.for_int('Enter a positive number', is_legal=(lambda x : x > 0))
+is_debugging    = prompt.for_bool('Display intermediate results',True)
+cycle_count     = 1
+test_number     = original_number
+
+timer = Stopwatch(running_now = True)
+
+while True:
+    if is_debugging:
+        print('Cycle', cycle_count, ': test number is now', test_number)
+    
+    ####################
+    if test_number == 1:
+        break;
+    ####################
+
+    cycle_count += 1
+    if test_number % 2 == 0:
+        test_number = test_number // 2
+    else:
+        test_number = 3*test_number + 1
+
+timer.stop()
+
+print('\n\nFor test number =',original_number,'cycles to 1 =',cycle_count)
+print('Process took', timer.read(), 'seconds')

@@ -1,0 +1,99 @@
+# Setup
+c-->from imp import reload
+c-->import q6solution
+c-->reload(q6solution)
+c-->from goody import irange
+c-->from q6solution import pair_sum, pair_sum_r, count, bidict
+c-->from q6solution import list_to_ll, str_ll, str_tree, list_to_tree
+c-->from tkinter import *
+
+# Test pair_sum
+c-->ll = list_to_ll([])
+e-->str_ll(pair_sum(ll))-->None
+c-->ll = list_to_ll([11])
+e-->str_ll(pair_sum(ll))-->None
+c-->ll = list_to_ll([11,12])
+e-->str_ll(pair_sum(ll))-->23->None
+c-->ll = list_to_ll([11,12,13,14,15,16,17,18])
+e-->str_ll(pair_sum(ll))-->23->27->31->35->None
+e-->str_ll(ll)-->11->12->13->14->15->16->17->18->None
+c-->ll = list_to_ll([11,12,13,14,15,16,17,18,19])
+e-->str_ll(pair_sum(ll))-->23->27->31->35->None
+e-->str_ll(ll)-->11->12->13->14->15->16->17->18->19->None
+
+
+# Test pair_sum_r
+c-->ll = list_to_ll([])
+e-->str_ll(pair_sum_r(ll))-->None
+c-->ll = list_to_ll([11])
+e-->str_ll(pair_sum_r(ll))-->None
+c-->ll = list_to_ll([11,12])
+e-->str_ll(pair_sum_r(ll))-->23->None
+c-->ll = list_to_ll([11,12,13,14,15,16,17,18])
+e-->str_ll(pair_sum_r(ll))-->23->27->31->35->None
+e-->str_ll(ll)-->11->12->13->14->15->16->17->18->None
+c-->ll = list_to_ll([11,12,13,14,15,16,17,18,19])
+e-->str_ll(pair_sum_r(ll))-->23->27->31->35->None
+e-->str_ll(ll)-->11->12->13->14->15->16->17->18->19->None
+
+
+# Test count
+c-->tree = list_to_tree(None)
+e-->[count(tree,i) for i in irange(1,3)]-->[0, 0, 0]
+c-->tree = list_to_tree([1, [2, None, None], [3, None, None]])
+e-->[count(tree,i) for i in irange(1,3)]-->[1, 1, 1]
+c-->tree = list_to_tree([1, [2, None, [1, None, None]], [3, [1, None, None], None]])
+e-->[count(tree,i) for i in irange(1,3)]-->[3, 1, 1]
+c-->tree = list_to_tree([1, [2, [1, None, [2, None, None]], [1, None, None]], [3, [1, None, None], None]])
+e-->[count(tree,i) for i in irange(1,3)]-->[4, 2, 1]
+
+
+# Test bidict
+^-->b1 = bidict(a = ((),(),((),[])))-->ValueError
+^-->b1 = bidict(a = {1})-->ValueError
+^-->b1 = bidict(a = (1,2,{1:'a'}))-->ValueError
+
+c-->b1 = bidict(a=1,b=2,c=1)
+==-->b1-->{'a': 1, 'b': 2, 'c': 1}
+==-->b1._rdict-->{1: {'a', 'c'}, 2: {'b'}}
+c-->b1['a']= 2
+==-->b1-->{'a': 2, 'b': 2, 'c': 1}
+==-->b1._rdict-->{1: {'c'}, 2: {'a', 'b'}}
+c-->b1['d']= 2
+==-->b1-->{'a': 2, 'b': 2, 'c': 1, 'd': 2}
+==-->b1._rdict-->{1: {'c'}, 2: {'d', 'a', 'b'}}
+c-->b1['c']= 2
+==-->b1-->{'a': 2, 'b': 2, 'c': 2, 'd': 2}
+==-->b1._rdict-->{2: {'d', 'a', 'c', 'b'}}
+
+c-->b1.clear()
+==-->b1-->{}
+==-->b1._rdict-->{}
+
+c-->b2 = bidict(a=1,b=2,c=1,d=2)
+c-->del b2['a']
+==-->b2-->{'b': 2, 'c': 1, 'd': 2}
+==-->b2._rdict-->{1: {'c'}, 2: {'d', 'b'}}
+^-->del b2['a']-->KeyError
+c-->del b2['b']
+==-->b2-->{'c': 1, 'd': 2}
+==-->b2._rdict-->{1: {'c'}, 2: {'d'}}
+c-->del b2['c']
+==-->b2-->{'d': 2}
+==-->b2._rdict-->{2: {'d'}}
+c-->del b2['d']
+==-->b2-->{}
+==-->b2._rdict-->{}
+
+c-->b3 = bidict(a=1,b=2,c=1,d=2)
+==-->b3(1)-->{'a','c'}
+==-->b3(2)-->{'b','d'}
+^-->b3(3)-->KeyError
+
+==-->bidict.all_objects()-->[b1, b2, b3]
+c-->bidict.forget(b2)
+==-->bidict.all_objects()-->[b1, b3]
+c-->bidict.forget(b3)
+==-->bidict.all_objects()-->[b1]
+c-->bidict.forget(b1)
+==-->bidict.all_objects()-->[]
