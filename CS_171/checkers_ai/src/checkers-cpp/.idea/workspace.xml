@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Checker_Teacher" targetName="Checker_Teacher" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4ce9af96-4827-4ed8-8e49-a8915b205566" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="ProjectId" id="1Sr1gBXKqfxR3GnLirl50ch0ku7" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Checker_Teacher" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Checker_Teacher" TARGET_NAME="Checker_Teacher" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Checker_Teacher" RUN_TARGET_NAME="Checker_Teacher">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4ce9af96-4827-4ed8-8e49-a8915b205566" name="Default Changelist" comment="" />
+      <created>1572307010370</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1572307010370</updated>
+      <workItem from="1572307015038" duration="14000" />
+      <workItem from="1572307045658" duration="5945000" />
+      <workItem from="1572381089582" duration="13363000" />
+      <workItem from="1572500039607" duration="9558000" />
+      <workItem from="1573082000087" duration="1948000" />
+      <workItem from="1573859675162" duration="197000" />
+      <workItem from="1574298511261" duration="7431000" />
+      <workItem from="1574322104299" duration="2810000" />
+      <workItem from="1574410055621" duration="399000" />
+      <workItem from="1574465590110" duration="778000" />
+      <workItem from="1574485918279" duration="8985000" />
+      <workItem from="1574497498276" duration="824000" />
+      <workItem from="1574525510314" duration="1806000" />
+      <workItem from="1574724056723" duration="833000" />
+      <workItem from="1575316151833" duration="564000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>
