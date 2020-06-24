@@ -1,0 +1,1 @@
+/cygdrive/c/cygwin64/bin/clang    -Wl,--enable-auto-import -v CMakeFiles/cmTC_56942.dir/CMakeCCompilerABI.c.o  -o cmTC_56942.exe -Wl,--out-implib,libcmTC_56942.dll.a -Wl,--major-image-version,0,--minor-image-version,0 

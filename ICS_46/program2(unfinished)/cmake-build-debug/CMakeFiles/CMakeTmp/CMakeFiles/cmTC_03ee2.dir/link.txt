@@ -1,0 +1,1 @@
+/cygdrive/c/cygwin64/bin/clang    -Wl,--enable-auto-import  CMakeFiles/cmTC_03ee2.dir/feature_tests.c.o  -o cmTC_03ee2.exe -Wl,--out-implib,libcmTC_03ee2.dll.a -Wl,--major-image-version,0,--minor-image-version,0 

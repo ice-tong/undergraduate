@@ -1,0 +1,41 @@
+The system is: CYGWIN - 2.11.1(0.329/5/3) - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /cygdrive/c/cygwin64/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+The C compiler identification is Clang, found in "/cygdrive/c/Users/Kian/Desktop/ICS 46/quiz8/cmake-build-debug/CMakeFiles/3.12.3/CompilerIdC/a.exe"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /cygdrive/c/cygwin64/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
+
+The CXX compiler identification is Clang, found in "/cygdrive/c/Users/Kian/Desktop/ICS 46/quiz8/cmake-build-debug/CMakeFiles/3.12.3/CompilerIdCXX/a.exe"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /cygdrive/c/Users/Kian/Desktop/ICS 46/quiz8/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make.exe" "cmTC_2a823/fast"
+/usr/bin/make -f CMakeFiles/cmTC_2a823.dir/build.make CMakeFiles/cmTC_2a823.dir/build
+make[1]: Entering directory '/cygdrive/c/Users/Kian/Desktop/ICS 46/quiz8/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2a823.dir/testCCompiler.c.o
+/cygdrive/c/cygwin64/bin/clang    -o CMakeFiles/cmTC_2a823.dir/testCCompiler.c.o   -c "/cygdrive/c/Users/Kian/Desktop/ICS 46/quiz8/cmake-build-debug/CMakeFiles/CMakeTmp/testCCompiler.c"
+Linking C executable cmTC_2a823.exe
+/cygdrive/c/Users/Kian/.CLion2018.3/system/cygwin_cmake/bin/cmake.exe -E cmake_link_script CMakeFiles/cmTC_2a823.dir/link.txt --verbose=1
+/cygdrive/c/cygwin64/bin/clang    -Wl,--enable-auto-import  CMakeFiles/cmTC_2a823.dir/testCCompiler.c.o  -o cmTC_2a823.exe -Wl,--out-implib,libcmTC_2a823.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+make[1]: Leaving directory '/cygdrive/c/Users/Kian/Desktop/ICS 46/quiz8/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
