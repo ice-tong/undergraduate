@@ -1,4 +1,0 @@
-bob;alice
-bob;carol
-alice;ted
-carol;ted
