@@ -1,0 +1,11 @@
+ast.DeclarationList(3,0)
+  ast.FunctionDefinition(3,0)[Symbol(main), []]
+    ast.StatementList(4,2)
+      ast.VariableDeclaration(4,2)[Symbol(x)]
+      ast.Assignment(6,2)
+        ast.AddressOf(6,6)[x]
+        ast.LogicalAnd(6,16)
+          ast.LogicalNot(6,10)
+            ast.Dereference(6,14)
+              ast.AddressOf(6,14)[x]
+          ast.LiteralBool(6,20)[TRUE]

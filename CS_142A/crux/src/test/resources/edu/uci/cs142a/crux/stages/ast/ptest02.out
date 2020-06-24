@@ -1,0 +1,17 @@
+ast.DeclarationList(3,0)
+  ast.FunctionDefinition(3,0)[Symbol(main), []]
+    ast.StatementList(4,2)
+      ast.VariableDeclaration(4,2)[Symbol(a)]
+      ast.VariableDeclaration(5,2)[Symbol(notA)]
+      ast.Assignment(6,2)
+        ast.AddressOf(6,6)[a]
+        ast.LiteralBool(6,10)[TRUE]
+      ast.Assignment(7,2)
+        ast.AddressOf(7,6)[notA]
+        ast.LogicalNot(7,13)
+          ast.Dereference(7,17)
+            ast.AddressOf(7,17)[a]
+      ast.Call(8,2)[Symbol(printInt)]
+        ast.ExpressionList(8,13)
+          ast.Dereference(8,13)
+            ast.AddressOf(8,13)[notA]

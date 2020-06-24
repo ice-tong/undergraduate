@@ -1,0 +1,11 @@
+// test redefine predefined
+
+func main() : void {
+    ::println();
+    var println: int;
+    ::println();
+}
+
+func printInt(x: int): void {
+    ::printInt(x);
+}

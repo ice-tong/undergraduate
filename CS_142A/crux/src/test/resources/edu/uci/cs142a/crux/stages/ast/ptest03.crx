@@ -1,0 +1,8 @@
+// test nested array indexing
+
+array x : int[4];
+array y : int[4][5];
+
+func main() : void {
+  let x[y[1][2]] = x[y[1][1]];
+}

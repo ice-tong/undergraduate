@@ -1,0 +1,17 @@
+// test array access
+
+array x : int[4];
+array y : int[4][5];
+array z : int[3][5][7][9];
+var v : int;
+
+func main() : void {
+  ::printInt(x[1]);
+  ::printInt(y[1][1]);
+  ::printInt(z[1][1][1][1]);
+
+  let x[1] = 1;
+  let v = x[1];
+
+  let x[y[1][2]] = x[y[z[1][1][1][1]][1]];
+}

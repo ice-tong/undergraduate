@@ -1,0 +1,9 @@
+// test variable containing keyword
+
+func main() : void {
+  var a: bool;
+  var notA: bool;
+  let a = true;
+  let notA = not a;
+  ::printInt(notA);
+}

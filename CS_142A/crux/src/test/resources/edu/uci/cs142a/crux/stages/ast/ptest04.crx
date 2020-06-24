@@ -1,0 +1,19 @@
+// test use after scope
+
+func main() : void {
+    if (true) {
+        var x: int;
+        ::printInt(x);
+    } else {
+        var y: int;
+        ::printInt(y);
+    }
+    ::printInt(x);
+    ::printInt(y);
+
+    while (true) {
+        var z: int;
+        ::printInt(z);
+    }
+    ::printInt(z);
+}

@@ -1,0 +1,5 @@
+// test look up variable
+
+func main() : void {
+  ::printInt(a);
+}

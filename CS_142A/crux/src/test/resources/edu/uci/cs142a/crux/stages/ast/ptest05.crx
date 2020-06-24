@@ -1,0 +1,12 @@
+// test var use in else
+
+func main() : void {
+    if (true) {
+        var x: int;
+        ::printInt(x);
+    } else {
+        ::printInt(x);
+        var x: int;
+        ::printInt(x);
+    }
+}

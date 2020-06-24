@@ -1,0 +1,24 @@
+ast.DeclarationList(3,0)
+  ast.FunctionDefinition(3,0)[Symbol(foo), [Symbol(a), Symbol(b), Symbol(c), Symbol(d), Symbol(e), Symbol(f), Symbol(g)]]
+    ast.StatementList(4,2)
+      ast.Return(4,2)
+        ast.Subtraction(4,24)
+          ast.LogicalOr(4,19)
+            ast.Addition(4,11)
+              ast.Dereference(4,9)
+                ast.AddressOf(4,9)[a]
+              ast.Multiplication(4,15)
+                ast.Dereference(4,13)
+                  ast.AddressOf(4,13)[b]
+                ast.Dereference(4,17)
+                  ast.AddressOf(4,17)[c]
+            ast.Dereference(4,22)
+              ast.AddressOf(4,22)[d]
+          ast.LogicalAnd(4,32)
+            ast.Division(4,28)
+              ast.Dereference(4,26)
+                ast.AddressOf(4,26)[e]
+              ast.Dereference(4,30)
+                ast.AddressOf(4,30)[f]
+            ast.Dereference(4,36)
+              ast.AddressOf(4,36)[g]

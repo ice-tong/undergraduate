@@ -1,0 +1,8 @@
+// function can't have non int or bool arguments
+
+func foo(a: int, b:void, c:error) : void {
+}
+
+func main() : void {
+  ::println();
+}
